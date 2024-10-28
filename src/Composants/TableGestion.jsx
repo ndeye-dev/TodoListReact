@@ -18,8 +18,8 @@ class TableGestion extends React.Component {
                     <tbody>
                         {this.props.tasks.map((task, index) => (
                             <tr key={index} className="">
-                                <td className="border border-slate-300 p-3">{task.title}</td>
-                                <td className="border border-slate-300">{task.description}</td>
+                                <td className="border border-slate-300 p-3">{tache.titre}</td>
+                                <td className="border border-slate-300">{tache.description}</td>
                                 <td className="border border-slate-300"><div className="flex"><IoMdEye /> <MdDelete /></div></td>
                             </tr>
                         ))}

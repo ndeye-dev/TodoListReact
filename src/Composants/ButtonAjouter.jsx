@@ -5,11 +5,10 @@ class ButtonAjouter extends React.Component {
         super(props);
         this.state = {
             isOpen: false,
-            task: '',
+            tache: '',
             description: '',
         };
     }
-
     toggleModal = () => {
         this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
     };
@@ -20,13 +19,13 @@ class ButtonAjouter extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const newTask = {
-            title: this.state.task,
+        const newTache = {
+            titre: this.state.tache,
             description: this.state.description,
         };
-        this.props.addTask(newTask);
-        this.toggleModal(); 
-        this.setState({ task: '', description: '' }); 
+        this.props.addtache(newTache);
+        this.toggleModal();
+        this.setState({ tache: '', description: '' });
     };
 
     render() {
@@ -49,10 +48,10 @@ class ButtonAjouter extends React.Component {
                                     <label className="block text-sm font-medium text-gray-700">Tâche</label>
                                     <input
                                         type="text"
-                                        name="task"
-                                        value={this.state.task}
+                                        name="tache"
+                                        value={this.state.tache}
                                         onChange={this.handleChange}
-                                        className="mt-1 block w-full rounded-md  shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                        className="bg-gray-400 text-white mt-1 block w-full rounded-md  shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 "
                                         required
                                     />
                                 </div>
@@ -62,7 +61,7 @@ class ButtonAjouter extends React.Component {
                                         name="description"
                                         value={this.state.description}
                                         onChange={this.handleChange}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                        className="bg-gray-400 mt-1 block w-full bg-0 rounded-md border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
                                         rows="3"
                                         required
                                     />
@@ -70,7 +69,7 @@ class ButtonAjouter extends React.Component {
                                 <div className="flex justify-end">
                                     <button
                                         type="button"
-                                        className="mr-2 bg-gray-300 text-black px-4 py-2 rounded-md hover:bg-gray-400"
+                                        className="mr-2 bg-gray-400 text-black px-4 py-2 rounded-md hover:bg-gray-400"
                                         onClick={this.toggleModal}
                                     >
                                         Annuler
