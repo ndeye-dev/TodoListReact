@@ -5,10 +5,11 @@ class ButtonAjouter extends React.Component {
         super(props);
         this.state = {
             isOpen: false,
-            tache: '',
+            task: '',
             description: '',
         };
     }
+
     toggleModal = () => {
         this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
     };
@@ -19,13 +20,13 @@ class ButtonAjouter extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const newTache = {
-            titre: this.state.tache,
+        const newTask = {
+            title: this.state.task,
             description: this.state.description,
         };
-        this.props.addtache(newTache);
+        this.props.addTask(newTask);
         this.toggleModal();
-        this.setState({ tache: '', description: '' });
+        this.setState({ task: '', description: '' });
     };
 
     render() {
@@ -48,8 +49,8 @@ class ButtonAjouter extends React.Component {
                                     <label className="block text-sm font-medium text-gray-700">Tâche</label>
                                     <input
                                         type="text"
-                                        name="tache"
-                                        value={this.state.tache}
+                                        name="task"
+                                        value={this.state.task}
                                         onChange={this.handleChange}
                                         className="bg-gray-400 text-white mt-1 block w-full rounded-md  shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 "
                                         required
@@ -65,6 +66,7 @@ class ButtonAjouter extends React.Component {
                                         rows="3"
                                         required
                                     />
+                                  
                                 </div>
                                 <div className="flex justify-end">
                                     <button
