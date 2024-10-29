@@ -6,7 +6,7 @@ function App() {
   return (
     <>  
     <div className='container mx-auto px-4'>
-    <h1 className="text-3xl font-bold text-center m-3 ">
+    <h1 className="text-3xl font-bold text-center m-10">
       TodoList
     </h1>  
       <div className="">

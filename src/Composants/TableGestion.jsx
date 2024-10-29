@@ -6,6 +6,7 @@ import { MdDelete } from "react-icons/md";
 import { HiPencilAlt } from "react-icons/hi";
 import SearchInput from "./SearchInput";
 import ButtonAjouter from "./ButtonAjouter";
+import Pagination from "./Pagination";
 
 class TableGestion extends React.Component {
     constructor(props) {
@@ -14,8 +15,9 @@ class TableGestion extends React.Component {
             tasks: [],
             searchTerm: '',
             isOpen: false,
-            cle: null
-
+            modific: false,
+            cle: null,
+            textModifie: null
         };
     }
 
@@ -28,34 +30,61 @@ class TableGestion extends React.Component {
             tasks: [...prevState.tasks, newTask],
         }));
     };
-// voir 
+
     buttonVoir = (voir) => {
         this.setState((prevState) => ({
             isOpen: !prevState.isOpen,
             cle: voir
         }))
-    }
-// supprimer
+    };
+
     suppLigne = (index) => {
         this.setState((prevState) => ({
             tasks: prevState.tasks.filter((_, i) => i !== index)
         }));
     };
     // suppLigne = (index) => {
-    //     this.setState((state) => {
-    //         const supp = [...state.tasks]; 
-    //         supp.splice(index, 1);
-    //         return { tasks: supp }; 
-    //     });
-    // };
+    //      this.setState((state) => {
+    //          const supp = [...state.tasks]; 
+    //          supp.splice(index, 1);
+    //          return { tasks: supp }; 
+    //      });
+    //  };
+
+    // modification 
+    modification = (index) => {
+        this.setState({
+            modific: true,
+            textModifie: { ...this.state.tasks[index] },
+            changeIndex: index
+        });
+    };
+
+    handleEditChange = (e) => {
+        const { name, value } = e.target;
+        this.setState(prevState => ({
+            textModifie: {
+                ...prevState.textModifie,
+                [name]: value
+            }
+        }));
+    };
+
+    submitModif = () => {
+        const { changeIndex, textModifie } = this.state;
+        this.setState(prevState => {
+            const updatedTasks = [...prevState.tasks];
+            updatedTasks[changeIndex] = textModifie;
+            return { tasks: updatedTasks, modific: false, textModifie: null, changeIndex: null };
+        });
+    };
+
     render() {
         const filteredTasks = this.state.tasks.filter(task =>
             task.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
             task.description.toLowerCase().includes(this.state.searchTerm.toLowerCase())
         );
-        const tabVoir = filteredTasks[this.state.cle]
-        console.log(tabVoir);
-
+        const tabVoir = filteredTasks[this.state.cle];
 
         return (
             <div>
@@ -106,30 +135,69 @@ class TableGestion extends React.Component {
                                                     >
                                                         Fermer
                                                     </button>
-
                                                 </div>
                                             </div>
                                         )}
                                         <button className="text-sm flex py-3 px-2 rounded-lg shadow-md focus:outline-none "
-                                           
+                                            onClick={() => this.modification(index)}
                                         >
-                                        <HiPencilAlt />
+                                            <HiPencilAlt />
                                         </button>
                                         <button className="text-sm flex py-3 px-2 rounded-lg shadow-md focus:outline-none "
-                                         onClick={() => this.suppLigne(filteredTasks.indexOf(task))} 
+                                            onClick={() => this.suppLigne(filteredTasks.indexOf(task))}
                                         >
                                             <MdDelete />
                                         </button>
-                                        
                                     </div>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+                <div className="mt-7 w-2/5">
+                    <Pagination />
+                </div>
+                {this.state.modific && (
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div className="bg-white rounded-xl shadow-lg p-20">
+                            <h2 className="text-lg font-bold mb-4 ">Modifier la tâche</h2>
+                            <input
+                                type="text"
+                                name="title"
+                                value={this.state.textModifie.title}
+                                onChange={this.handleEditChange}
+                                placeholder=""
+                                className="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                required
+                            />
+                            <input
+                                name="description"
+                                value={this.state.textModifie.description}
+                                onChange={this.handleEditChange}
+                                placeholder=""
+                                className="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                required
+                            />
+                            <div className="flex justify-end">
+                            <button className="text-sm   p-3 bg-blue-600 text-white px-2 rounded-lg shadow-lg focus:outline-none "
+                                onClick={() => this.setState({ modific: false, textModifie: null })}
+                            >
+                                Annuler
+                            </button>
+                            <button className="text-sm  mt-10 p-3 bg-slate-400 px-2 rounded-lg shadow-lg  focus:outline-none "
+                                onClick={this.submitModif}
+                            >
+                                Mise à jour
+                            </button>
+                            
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         );
     }
 }
 
 export default TableGestion;
+

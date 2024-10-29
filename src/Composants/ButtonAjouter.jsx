@@ -11,6 +11,7 @@ class ButtonAjouter extends React.Component {
             description: '',
         };
     }
+    
     toggleModal = () => {
         this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
     };
@@ -25,6 +26,12 @@ class ButtonAjouter extends React.Component {
             title: this.state.task,
             description: this.state.description,
         };
+
+        //localStorage
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        tasks.push(newTask);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
         this.props.addTask(newTask);
         this.toggleModal();
         this.setState({ task: '', description: '' });
@@ -34,6 +41,7 @@ class ButtonAjouter extends React.Component {
         
         return (
             <div>
+                
                 <button
                     type="button"
                     className="rounded-md bg-blue-600 px-3 py-1.5 text-sm text-white shadow-sm hover:bg-blue-500 focus-visible:outline-indigo-600"

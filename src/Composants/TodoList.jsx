@@ -18,7 +18,7 @@ addTask = (task) => {
  
 render() {
     return (
-        <div className="p-4">
+        <div className="p-4 ">
             <div className="py-5">
                <TableGestion tasks={this.state.tasks} />
             </div>
