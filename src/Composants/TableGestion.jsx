@@ -37,7 +37,7 @@ class TableGestion extends React.Component {
             cle: voir
         }))
     };
-
+//   supprimer
     suppLigne = (index) => {
         this.setState((prevState) => ({
             tasks: prevState.tasks.filter((_, i) => i !== index)
@@ -92,12 +92,12 @@ class TableGestion extends React.Component {
                     <SearchInput onChange={this.handleSearchChange} />
                     <ButtonAjouter addTask={this.addTask} />
                 </div>
-                <table className="border-collapse border border-slate-700 w-full place-content-center">
+                <table className="border-collapse border border-slate-700 w-full place-content-center text-center">
                     <thead>
                         <tr>
-                            <th className="border border-slate-700 text-start p-2">Tâches</th>
-                            <th className="border border-slate-700 text-start">Description</th>
-                            <th className="border border-slate-700 text-start">Actions</th>
+                            <th className="border border-slate-700  p-2">Tâches</th>
+                            <th className="border border-slate-700 ">Description</th>
+                            <th className="border border-slate-700 ">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -106,13 +106,14 @@ class TableGestion extends React.Component {
                                 <td className="border border-slate-700 p-3">{task.title}</td>
                                 <td className="border border-slate-700">{task.description}</td>
                                 <td className="border border-slate-700">
-                                    <div className="flex">
-                                        <button className="text-sm flex py-3 px-2 rounded-lg shadow-md focus:outline-none "
-                                            onClick={() => this.buttonVoir(index)}
+                                    <div className="flex justify-center.">
+                                        <button className="text-sm font-bold text-green-600 flex py-3 px-2 rounded-lg shadow-md focus:outline-none "
+                                            onClick={() => alert(this.buttonVoir(index))}
                                         >
                                             <IoMdEye />
                                         </button>
                                         {this.state.isOpen && (
+                                            
                                             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
                                                 <div className="bg-white rounded-xl shadow-lg p-20">
                                                     <h2 className="text-lg  font-bold mb-4">Voir la tâche</h2>
@@ -138,12 +139,12 @@ class TableGestion extends React.Component {
                                                 </div>
                                             </div>
                                         )}
-                                        <button className="text-sm flex py-3 px-2 rounded-lg shadow-md focus:outline-none "
+                                        <button className="text-sm font-bold flex py-3 px-2 text-blue-600 rounded-lg shadow-md focus:outline-none "
                                             onClick={() => this.modification(index)}
                                         >
                                             <HiPencilAlt />
                                         </button>
-                                        <button className="text-sm flex py-3 px-2 rounded-lg shadow-md focus:outline-none "
+                                        <button className="text-sm font-bold flex text-red-600 py-3 px-2 rounded-lg shadow-md focus:outline-none "
                                             onClick={() => this.suppLigne(filteredTasks.indexOf(task))}
                                         >
                                             <MdDelete />
@@ -161,30 +162,36 @@ class TableGestion extends React.Component {
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                         <div className="bg-white rounded-xl shadow-lg p-20">
                             <h2 className="text-lg font-bold mb-4 ">Modifier la tâche</h2>
+                            <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700">Tâche</label>
                             <input
                                 type="text"
                                 name="title"
                                 value={this.state.textModifie.title}
                                 onChange={this.handleEditChange}
                                 placeholder=""
-                                className="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                className="text-sm p-2 mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
                                 required
-                            />
+                            /> 
+                            </div>
+                            <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700">Description</label>
                             <input
                                 name="description"
                                 value={this.state.textModifie.description}
                                 onChange={this.handleEditChange}
                                 placeholder=""
-                                className="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                className="text-sm p-2 mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
                                 required
                             />
-                            <div className="flex justify-end">
-                            <button className="text-sm   p-3 bg-blue-600 text-white px-2 rounded-lg shadow-lg focus:outline-none "
+                            </div>
+                            <div className="flex justify-end gap-3">
+                            <button className="text-sm mt-5 bg-blue-600 text-white px-2 rounded-lg shadow-lg focus:outline-none "
                                 onClick={() => this.setState({ modific: false, textModifie: null })}
                             >
                                 Annuler
                             </button>
-                            <button className="text-sm  mt-10 p-3 bg-slate-400 px-2 rounded-lg shadow-lg  focus:outline-none "
+                            <button className="text-sm text-white  mt-5 p-3 bg-slate-400 px-2 rounded-lg shadow-lg  focus:outline-none "
                                 onClick={this.submitModif}
                             >
                                 Mise à jour
@@ -200,4 +207,3 @@ class TableGestion extends React.Component {
 }
 
 export default TableGestion;
-

@@ -61,7 +61,7 @@ class ButtonAjouter extends React.Component {
                                         name="task"
                                         value={this.state.task}
                                         onChange={this.handleChange}
-                                        className="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                        className="mt-1 block w-full p-2 rounded-md border-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
                                         required
                                     />
                                 </div>
@@ -71,14 +71,14 @@ class ButtonAjouter extends React.Component {
                                         name="description"
                                         value={this.state.description}
                                         onChange={this.handleChange}
-                                        className="mt-1 block rounded-md border-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                        className="mt-1 block p-2 rounded-md border-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
                                         required
                                     />
                                 </div>
-                                <div className="flex justify-end">
+                                <div className="flex justify-end gap-3">
                                     <button
                                         type="button"
-                                        className="mr-2 bg-gray-400 text-black px-4 py-2 rounded-md hover:bg-gray-400"
+                                        className=" bg-gray-400 text-black px-4 py-2 rounded-md hover:bg-gray-400"
                                         onClick={this.toggleModal}
                                     >
                                         Annuler
