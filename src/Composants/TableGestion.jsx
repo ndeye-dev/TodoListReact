@@ -108,7 +108,7 @@ class TableGestion extends React.Component {
                                 <td className="border border-slate-700">
                                     <div className="flex justify-center.">
                                         <button className="text-sm font-bold text-green-600 flex py-3 px-2 rounded-lg shadow-md focus:outline-none "
-                                            onClick={() => alert(this.buttonVoir(index))}
+                                            onClick={() => this.buttonVoir(index)}
                                         >
                                             <IoMdEye />
                                         </button>
